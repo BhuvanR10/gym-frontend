@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "../api/axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap CSS is imported for styling
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Attendance() {
-  const [selectedDate, setSelectedDate] = useState(new Date()); // Use Date object for react-datepicker
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchAttendance();
-  }, [selectedDate]); // Depend on selectedDate
-
-  const fetchAttendance = async () => {
+  const fetchAttendance = useCallback(async () => {
     try {
       setLoading(true);
-      // Format date to YYYY-MM-DD for the API
       const formattedDate = selectedDate.toISOString().slice(0, 10);
       const res = await axios.get(`/attendance?date=${formattedDate}`);
       setRecords(res.data);
@@ -26,7 +21,11 @@ function Attendance() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedDate]);
+
+  useEffect(() => {
+    fetchAttendance();
+  }, [fetchAttendance]);
 
   return (
     <div className="container mt-4 p-4 shadow-sm rounded bg-white">
