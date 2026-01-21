@@ -1,13 +1,91 @@
+:root {
+  --primary-color: #007bff; /* Bootstrap primary blue */
+  --secondary-color: #6c757d; /* Bootstrap secondary grey */
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --text-color: #333;
+  --bg-light: #f4f7fa;
+  --border-color: #dee2e6;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', sans-serif; /* Modern font */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-light);
+  color: var(--text-color);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Enhanced container styling */
+.container {
+  background: #fff;
+  padding: 30px; /* More padding */
+  border-radius: 10px; /* Softer corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  margin-top: 20px; /* Add some top margin */
+  margin-bottom: 20px; /* Add some bottom margin */
+}
+
+/* General table styling enhancements */
+.table {
+  margin-bottom: 0; /* Remove default table bottom margin */
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05); /* Light hover effect */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-color);
+  font-family: 'Montserrat', sans-serif; /* A more distinct font for headings */
+  margin-bottom: 0.5em;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade for hover */
+  border-color: #0056b3;
+}
+
+/* Form controls */
+.form-control {
+  border-radius: 5px;
+  border-color: var(--border-color);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.animated-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.animated-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
 }
