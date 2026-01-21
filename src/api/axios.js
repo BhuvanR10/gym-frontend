@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://gym-backend-mn1k.onrender.com/api",
 });
 
 instance.interceptors.request.use(
