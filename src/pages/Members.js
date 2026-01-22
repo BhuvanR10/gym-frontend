@@ -4,10 +4,15 @@ import axios from "../api/axios";
 function Members() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const [editing, setEditing] = useState(null);
   const [renewing, setRenewing] = useState(null);
   const [newEndDate, setNewEndDate] = useState("");
+
+  // 🔹 IMPORTANT: separate input vs applied search
+  const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
+
   const [statusFilter, setStatusFilter] = useState("");
   const [planTypeFilter, setPlanTypeFilter] = useState("");
   const [error, setError] = useState("");
@@ -23,15 +28,12 @@ function Members() {
       if (statusFilter) params.append("status", statusFilter);
       if (planTypeFilter) params.append("plan_type", planTypeFilter);
 
-      const res = await axios.get(
-        `/members?${params.toString()}`,
-        {
-          headers: {
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-          },
-        }
-      );
+      const res = await axios.get(`/members?${params.toString()}`, {
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+        },
+      });
 
       setMembers(res.data);
     } catch (err) {
@@ -135,8 +137,8 @@ function Members() {
           <input
             className="form-control"
             placeholder="Search by name"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
 
@@ -166,7 +168,10 @@ function Members() {
         </div>
 
         <div className="col-md-2">
-          <button className="btn btn-primary w-100" onClick={fetchMembers}>
+          <button
+            className="btn btn-primary w-100"
+            onClick={() => setSearch(searchInput)}
+          >
             Apply
           </button>
         </div>
@@ -183,7 +188,7 @@ function Members() {
               <th>Plan</th>
               <th>End Date</th>
               <th>Status</th>
-              <th width="180">Actions</th>
+              <th width="300">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -205,9 +210,7 @@ function Members() {
                 <td>
                   <span
                     className={`badge ${
-                      m.status === "Active"
-                        ? "bg-success"
-                        : "bg-danger"
+                      m.status === "Active" ? "bg-success" : "bg-danger"
                     }`}
                   >
                     {m.status}
