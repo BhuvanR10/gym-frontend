@@ -38,7 +38,7 @@ function Navbar() {
         </button>
 
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav gap-2">
             <li className="nav-item">
               <Link to="/dashboard" className={isActive("/dashboard")}>
                 📊 Dashboard
