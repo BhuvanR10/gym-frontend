@@ -29,10 +29,7 @@ function Members() {
       if (planTypeFilter) params.append("plan_type", planTypeFilter);
 
       const res = await axios.get(`/members?${params.toString()}`, {
-        headers: {
-          "Cache-Control": "no-cache",
-          Pragma: "no-cache",
-        },
+        
       });
 
       setMembers(res.data);
