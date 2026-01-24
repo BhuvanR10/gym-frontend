@@ -119,7 +119,7 @@ function ExpiringMembers() {
                 </td>
               </tr>
             ) : (
-              members.map((m) => (
+              Array.isArray(members) && members.map((m) => (
                 <tr key={m.member_id} className={m.days_left <= 7 ? "table-warning" : ""}>
                   <td>{m.name}</td>
                   <td>{m.phone}</td>

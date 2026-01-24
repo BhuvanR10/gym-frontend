@@ -32,7 +32,13 @@ function Members() {
         
       });
 
-      setMembers(res.data);
+      if (Array.isArray(res.data)) {
+        setMembers(res.data);
+      } else {
+        console.error("Invalid members response:", res.data);
+        setMembers([]);
+      }
+
     } catch (err) {
       console.error("FETCH MEMBERS ERROR:", err);
       setError("Failed to load members. Please try again.");
@@ -197,7 +203,7 @@ function Members() {
               </tr>
             )}
 
-            {members.map((m) => (
+            {Array.isArray(members) && members.map((m) => (
               <tr key={m.member_id}>
                 <td>{m.name}</td>
                 <td>{m.phone}</td>
